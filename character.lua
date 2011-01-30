@@ -25,6 +25,10 @@ function Character:draw()
 	if self.isAlive then
 		love.graphics.draw(self.image, self.xPosition - self.image:getWidth() / 2, self.yPosition - self.image:getHeight() / 2, 0, 1, 1, 0, 0)
 		self:drawName()
+	else
+		love.graphics.setColor(255, 0, 0)
+		love.graphics.draw(self.image, self.xPosition - self.image:getWidth() / 2, self.yPosition - self.image:getHeight() / 2, 0, 1, 1, 0, 0)
+		love.graphics.setColor(255, 255, 255)
 	end
 	love.graphics.setColor(unpack(self.functionColour))
 	if not self.isSelected then
@@ -33,6 +37,7 @@ function Character:draw()
 end
 
 function Character:drawName()
+	--Add a sinusoidal effect to the name if the player is selected
 	local newPosition = self.xPosition - love.graphics.getFont():getWidth(self.name) / 2
 	for i = 0, #self.name do
 		local c = self.name:sub(i, i)	

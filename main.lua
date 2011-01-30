@@ -32,7 +32,8 @@ function love.load() --Load all game assets
 	music =	{	gameMusic = love.audio.newSource("media/GameMusic.mp3"), menuIntro = love.audio.newSource("media/MenuIntro.wav") }
 	--Store all sounds in a table
 	sounds = {	deathSounds = {love.audio.newSource("media/Death1.wav"), love.audio.newSource("media/Death2.wav")},
-				tauntSounds = {love.audio.newSource("media/Taunt1.wav"), love.audio.newSource("media/Taunt2.wav")}}
+				tauntSounds = {love.audio.newSource("media/Taunt1.wav"), love.audio.newSource("media/Taunt2.wav"), love.audio.newSource("media/MotherFunctor.mp3")},
+				killStreaks = {love.audio.newSource("media/DoubleKill.mp3"), love.audio.newSource("media/TripleKill.mp3"), love.audio.newSource("media/QuadraKill.mp3"), love.audio.newSource("media/PentaKill.mp3")}}
 	--Store all file paths in a table
 	files = {names = "names.txt", adjectives = "adjectives.txt"}
 	randomNames = {}

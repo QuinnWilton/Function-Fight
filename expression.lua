@@ -1,5 +1,6 @@
 require "middleclass"
 
+--Lua expressions to replace mathematical expressions with
 replacementTable = {{"(-x)", function(x) i = string.find(x, "-"); return string.sub(x, 1, i) .. "1*x" end},
 					{"(%dx)", function(x) i = string.find(x, "%d"); return string.sub(x, 1, i) .. "*x" end},
 					{"abs%(", "math.abs%("},
@@ -26,17 +27,19 @@ function Expression:initialize(expression)
 end
 
 function Expression:parse()
+	--Translate a mathematical expression into Lua code
 	for _, v in ipairs(replacementTable) do
 		self.expression = string.gsub(self.expression, v[1], v[2])
 	end
-	print(self.expression)
 end
 
 function Expression:evaluate(value)
+	--Evaluate the function at value
 	return loadstring("return ".. string.gsub(self.expression, "([^%a]x[^%a])", function(x) i = string.find(x, "x"); return string.sub(x, 1, i -1) .. value .. string.sub(x, i + 1) end))()
 end
 
 function Expression:transform(x, y)
+	--Transform a function to pass through a specific coordinate
 	local result = self:evaluate(x)
 	local difference = y - result
 	self.expression = self.expression .." + "..difference
